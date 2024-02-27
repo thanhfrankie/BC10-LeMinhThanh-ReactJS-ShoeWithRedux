@@ -26,12 +26,12 @@ export let shoeReducer = (state = initialState, action) => {
       });
       if (index == -1) {
         let newShoe = { ...action.payload, amount: 1 };
-        cloneCart.push(newShoe);
+        cloneCart = [...cloneCart, newShoe];
       } else {
         cloneCart[index].amount++;
       }
-      state.cart = cloneCart;
-      return { ...state };
+      // state.cart = cloneCart;
+      return { ...state, cart: cloneCart };
     }
     case DELETE_SHOE: {
       let idShoe = action.payload;
@@ -43,22 +43,27 @@ export let shoeReducer = (state = initialState, action) => {
       let index = cloneCart.findIndex((item) => {
         return item.id === action.payload;
       });
-      cloneCart[index].amount++;
+      if (index == -1) {
+        return { ...state };
+      } else {
+        cloneCart[index].amount++;
+      }
+      // cloneCart[index].amount++;
 
-      state.cart = cloneCart;
-      return { ...state };
+      // state.cart = cloneCart;
+      return { ...state, cart: cloneCart };
     }
-    case MINUS_AMOUNT: {
-      let cloneCart = [...state.cart];
-      let index = cloneCart.findIndex((item) => {
-        return item.id === action.payload;
-      });
-      cloneCart[index].amount--;
+    // case MINUS_AMOUNT: {
+    //   let cloneCart = [...state.cart];
+    //   let index = cloneCart.findIndex((item) => {
+    //     return item.id === action.payload;
+    //   });
+    //   cloneCart[index].amount--;
 
-      state.cart = cloneCart;
-      return { ...state };
-    }
-    
+    //   // state.cart = cloneCart;
+    //   return { ...state, cart: cloneCart };
+    // }
+
     default:
       return state;
   }
