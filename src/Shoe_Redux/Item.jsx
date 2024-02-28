@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ADD_SHOE, VIEW_DETAIL } from "./redux/constant";
 import { addShoeAction, viewDetailAction } from "./redux/action";
 
 class Item extends Component {
@@ -43,4 +42,3 @@ let mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps)(Item);
-// 

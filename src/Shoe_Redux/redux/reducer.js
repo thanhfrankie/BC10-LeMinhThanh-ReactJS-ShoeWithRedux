@@ -26,7 +26,7 @@ export let shoeReducer = (state = initialState, action) => {
       });
       if (index == -1) {
         let newShoe = { ...action.payload, amount: 1 };
-        cloneCart.push(newShoe);
+        cloneCart = [...cloneCart, newShoe];
       } else {
         cloneCart[index].amount++;
       }
@@ -42,7 +42,12 @@ export let shoeReducer = (state = initialState, action) => {
       let index = cloneCart.findIndex((item) => {
         return item.id === action.payload;
       });
-      cloneCart[index].amount++;
+      if (index == -1) {
+        return { ...state };
+      } else {
+        cloneCart[index].amount++;
+      }
+      // cloneCart[index].amount++;
 
       return { ...state, cart: cloneCart };
     }
