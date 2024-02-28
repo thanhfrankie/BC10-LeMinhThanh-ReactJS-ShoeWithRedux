@@ -30,8 +30,7 @@ export let shoeReducer = (state = initialState, action) => {
       } else {
         cloneCart[index].amount++;
       }
-      state.cart = cloneCart;
-      return { ...state };
+      return { ...state, cart: cloneCart };
     }
     case DELETE_SHOE: {
       let idShoe = action.payload;
@@ -45,8 +44,7 @@ export let shoeReducer = (state = initialState, action) => {
       });
       cloneCart[index].amount++;
 
-      state.cart = cloneCart;
-      return { ...state };
+      return { ...state, cart: cloneCart };
     }
     case MINUS_AMOUNT: {
       let cloneCart = [...state.cart];
@@ -54,11 +52,13 @@ export let shoeReducer = (state = initialState, action) => {
         return item.id === action.payload;
       });
       cloneCart[index].amount--;
-
-      state.cart = cloneCart;
-      return { ...state };
+      if (cloneCart[index].amount === 0) {
+        alert(`Sản phẩm ${cloneCart[index].name} sẽ được xóa khỏi giỏ hàng`);
+        cloneCart.splice(index, 1);
+      }
+      return { ...state, cart: cloneCart };
     }
-    
+
     default:
       return state;
   }

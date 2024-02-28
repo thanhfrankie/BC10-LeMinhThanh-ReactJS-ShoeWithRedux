@@ -8,7 +8,6 @@ import {
 
 class Cart extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="col-12">
         <table className="table">
@@ -30,11 +29,16 @@ class Cart extends Component {
                     <strong>{item.price * item.amount} $</strong>
                   </td>
                   <td>
-                    <button className="btn-dark"   onClick={this.props.handleMinusAmount(item.id)}>-</button>
+                    <button
+                      className="btn-dark"
+                      onClick={() => this.props.handleMinusAmount(item.id)}
+                    >
+                      -
+                    </button>
                     <strong>{item.amount}</strong>
                     <button
                       className="btn-warning"
-                      onClick={this.props.handleAddAmount(item.id)}
+                      onClick={() => this.props.handleAddAmount(item.id)}
                     >
                       +
                     </button>
